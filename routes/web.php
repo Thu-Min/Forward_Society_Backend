@@ -6,13 +6,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth/login');
 });
-Route::get('/form', function () {
-    return view('eventCreateForm');
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', function() {
+        return view('components/dashboard/dashboard');
+    })->name('dashboard');
+
+    Route::get('/user', function() {
+        return view('components/dashboard/user');
+    })->name('user');
+
+    Route::get('/blog', function() {
+        return view('components/dashboard/blog');
+    })->name('blog');
+
+    Route::get('/event/create', function () {
+        return view('components/dashboard/eventCreateForm');
+    })->name('eventCreate');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
