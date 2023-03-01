@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth/login');
 });
+Route::get('/form', function () {
+    return view('eventCreateForm');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -11,7 +11,7 @@
     <body>
         <div class="flex">
         <!-- SideBar start -->
-        <aside class="w-0 md:w-2/5 lg:w-[400px] h-screen bg-gray-900 flex flex-col">
+        <aside class="w-0 md:w-2/5 lg:w-[400px]  h-screen bg-gray-900 flex flex-col">
             <div class="p-5">
                 <img src="{{ asset('album/logo.png') }}" alt="" class="w-28" />
             </div>
@@ -182,6 +182,7 @@
                 </div>
             </div>
             <!-- Breadcrumb end -->
+
         </div>
         <!-- Workspace end -->
         </div>
