@@ -124,7 +124,7 @@
                 <!-- just spacer -->
                 <!-- Search input start -->
                 <div
-                    class="w-96 px-3 flex items-center border border-gray-400 rounded shadow-md">
+                    class="w-96 px-3 flex justify-start items-center border border-gray-400 rounded shadow-md">
                     <!-- Search icon -->
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
