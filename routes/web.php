@@ -11,8 +11,8 @@ Route::get('/', function () {
 //     return view('components/dashboard/dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function() {
+Route::middleware(['auth', 'verified'])->prefix('/dashboard')->group(function () {
+    Route::get('/', function() {
         return view('components/dashboard/dashboard');
     })->name('dashboard');
 
