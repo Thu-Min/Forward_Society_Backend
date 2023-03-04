@@ -57,13 +57,16 @@
                        ID
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Timeline Title
+                        Testimonial Name
+                    </th>
+                     <th scope="col" class="px-6 py-3">
+                        Testimonial Position
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Timeline Image
+                        Testimonial Image
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Timeline Description
+                        Testimonial Description
                     </th>
 
                     <th scope="col" class="px-6 py-3">
@@ -81,14 +84,17 @@
                     <td class="px-6 py-4">
                         {{ Str::limit($t->name, 30) }}
                     </td>
-                     <td class="px-6 py-4">
+                      <td class="px-6 py-4">
+                        {{ Str::limit($t->position, 30) }}
+                    </td>
+                     <td class="px-0 py-4">
                         <img style="width:130px;onject-fit:cover" src="{{asset('storage/'.$t->photo)}}" />
                     </td>
                     <td class="px-6 py-4">
 
                          {{ Str::limit($t->description, 45) }}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-0 py-4">
                         <a href="{{route('testimonial.edit',$t->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                           <a href="{{route('testimonial.delete',$t->id)}}" class="ml-3 font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
 
