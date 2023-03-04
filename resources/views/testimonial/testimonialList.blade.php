@@ -39,14 +39,14 @@
         </svg>
         <div
             class="p-2 px-3 font-semibold text-gray-500 capitalize rounded-full bg-slate-300">
-            Timeline List
+            Testimonial List
         </div>
-        <a href="{{route('timeline.createPage')}}">
-            <button class="px-4 py-2 ml-4 font-semibold text-white bg-blue-600 rounded-lg shadow-md btn-contained hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">Create Timeline</button>
+        <a href="{{route('testimonial.createPage')}}">
+            <button class="px-4 py-2 ml-4 font-semibold text-white bg-blue-600 rounded-lg shadow-md btn-contained hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">Create Testimonial</button>
         </a>
     </div>
 <!-- Breadcrumb end -->
- @if(count($timelineData)>0)
+ @if(count($testimonialData)>0)
     <div class="relative m-2 overflow-x-auto rounded-lg shadow-md">
 
 
@@ -72,14 +72,14 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($timelineData as $t)
+                @foreach($testimonialData as $t)
                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                        {{$t->id}}
                     </th>
 
                     <td class="px-6 py-4">
-                        {{ Str::limit($t->title, 30) }}
+                        {{ Str::limit($t->name, 30) }}
                     </td>
                      <td class="px-6 py-4">
                         <img style="width:130px;onject-fit:cover" src="{{asset('storage/'.$t->photo)}}" />
@@ -89,8 +89,8 @@
                          {{ Str::limit($t->description, 45) }}
                     </td>
                     <td class="px-6 py-4">
-                        <a href="{{route('timeline.edit',$t->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                          <a href="{{route('timeline.delete',$t->id)}}" class="ml-3 font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                        <a href="{{route('testimonial.edit',$t->id)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                          <a href="{{route('testimonial.delete',$t->id)}}" class="ml-3 font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
 
                     </td>
                 </tr>
@@ -100,7 +100,7 @@
             </tbody>
         </table>
         @else
-           <h3 class="mx-auto mt-10 text-2xl font-semibold text-center text-blue-600"> There is no Timelime Data.Add some new....</h3>
+           <h3 class="mx-auto mt-10 text-2xl font-semibold text-center text-blue-600"> There is no Testimonial Data.Add some new....</h3>
         @endif
 
     </div>
