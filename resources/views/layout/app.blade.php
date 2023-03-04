@@ -23,7 +23,7 @@
             </div>
 
             <!-- Navigation start -->
-            <ul class="flex flex-col items-center space-y-3 mt-5 mx-3 flex-1">
+            <ul class="flex flex-col items-center flex-1 mx-3 mt-5 space-y-3">
                 <!-- Active State: {bg-primary} -->
                 <a href="{{ route('dashboard') }}" class="w-[95%] flex items-center gap-3 cursor-pointer rounded-md py-2 pl-5 text-white hover:bg-gray-700 active:bg-primary">
                     {{-- <li
@@ -79,17 +79,36 @@
                         <p class="text-lg font-bold tracking-wider">User</p>
                     {{-- </li> --}}
                 </a>
+                 <a href="{{ route('timeline.list') }}" class="w-[95%] flex items-center gap-3 cursor-pointer rounded-md py-2 pl-5 text-white hover:bg-gray-700">
+                    {{-- <li
+                        class=""> --}}
+                        <!-- Team Icon -->
+                        <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6">
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+                        </svg>
+                        <p class="text-lg font-bold tracking-wider">Timeline</p>
+                    {{-- </li> --}}
+                </a>
             </ul>
             <!-- Navigation end -->
 
             <!-- Profile Detail start-->
             <div
-            class="py-3 px-5 m-5 bg-slate-700 rounded-lg cursor-pointer transition duration-200 transform hover:shadow-md hover:shadow-slate-700 hover:bg-slate-800 hover:-translate-y-1">
+            class="px-5 py-3 m-5 transition duration-200 transform rounded-lg cursor-pointer bg-slate-700 hover:shadow-md hover:shadow-slate-700 hover:bg-slate-800 hover:-translate-y-1">
                 <div class="flex items-center gap-3">
-                    <div class="w-14 h-14 rounded-full bg-slate-300"></div>
+                    <div class="rounded-full w-14 h-14 bg-slate-300"></div>
                     <div class="">
                         <h1 class="font-bold text-slate-100">User Name</h1>
-                        <p class="text-slate-300 text-sm">View Profile</p>
+                        <p class="text-sm text-slate-300">View Profile</p>
                     </div>
                 </div>
             </div>
@@ -101,12 +120,12 @@
         <div class="w-full h-screen bg-slate-200">
             <!-- Nav start -->
             <div
-            class="bg-slate-100 py-4 flex justify-between items-center shadow-md">
+            class="flex items-center justify-between py-4 shadow-md bg-slate-100">
                 <div class="py-4"></div>
                 <!-- just spacer -->
                 <!-- Search input start -->
                 <div
-                    class="w-96 px-3 flex items-center border border-gray-400 rounded shadow-md">
+                    class="flex items-center px-3 border border-gray-400 rounded shadow-md w-96">
                     <!-- Search icon -->
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -123,11 +142,11 @@
                     <input
                     type="text"
                     placeholder="Search..."
-                    class="outline-none border-transparent bg-transparent w-full py-2 text-black font-semibold tracking-wide placeholder:text-gray-800 placeholder:font-medium focus:border-transparent focus:ring-0"/>
+                    class="w-full py-2 font-semibold tracking-wide text-black bg-transparent border-transparent outline-none placeholder:text-gray-800 placeholder:font-medium focus:border-transparent focus:ring-0"/>
                 </div>
                 <!-- Search input end -->
 
-                <div class="text-2xl flex items-center gap-5 mr-5">
+                <div class="flex items-center gap-5 mr-5 text-2xl">
                     <!-- Notification icon -->
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -158,7 +177,7 @@
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button type="submit"
-                        class="py-1 px-3 text-base font-semibold rounded border-2 border-primary transition hover:bg-primary hover:text-slate-100">
+                        class="px-3 py-1 text-base font-semibold transition border-2 rounded border-primary hover:bg-primary hover:text-slate-100">
                         Sign out
                         </button>
                     </form>

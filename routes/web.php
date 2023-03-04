@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TimelineController;
 
 Route::get('/', function () {
     return view('auth/login');
@@ -23,6 +24,16 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->group(function ()
     Route::get('/blog', function() {
         return view('components/dashboard/blog');
     })->name('blog');
+
+    //Admin Timeline
+    Route::get('/timeline/create-page',[TimelineController::class,'createTimelinePage'])->name('timeline.createPage');
+    Route::post('/timeline/create',[TimelineController::class,'createTimeline'])->name('timeline.create');
+    Route::get('/timeline/list',[TimelineController::class,'timelineList'])->name('timeline.list');
+    Route::get('/timeline/edit/{id}',[TimelineController::class,'timelineEdit'])->name('timeline.edit');
+    Route::post('/timeline/update/{id}',[TimelineController::class,'timelineUpdate'])->name('timeline.update');
+
+    Route::get('/timeline/delete/{id}',[TimelineController::class,'timelineDelete'])->name('timeline.delete');
+
 });
 
 Route::middleware('auth')->group(function () {
