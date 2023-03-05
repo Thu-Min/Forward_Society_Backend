@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\TestimonialController;
@@ -25,6 +26,14 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->group(function ()
     Route::get('/blog', function() {
         return view('components/dashboard/blog');
     })->name('blog');
+
+
+     //Admin Messages
+        Route::get('/messages/list',[MessageController::class,'messagesList'])->name('messages.list');
+        Route::get('/messages/delete/{id}',[MessageController::class,'messagesDelete'])->name('messages.delete');
+        Route::get('/messages/detail/{id}',[MessageController::class,'messagesDetail'])->name('messages.detail');
+
+
 
     //Admin Timeline
     Route::get('/timeline/create-page',[TimelineController::class,'createTimelinePage'])->name('timeline.createPage');
