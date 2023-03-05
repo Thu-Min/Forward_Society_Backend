@@ -21,11 +21,7 @@ class TimelineController extends Controller
    }
    //go to edit timeline page
    public function timelineEdit($id){
-
-
-
     $timelineDBData=Timeline::where('id',$id)->first();
-
    return view('timeline.editTimeline',compact('timelineDBData'));
 
    }
