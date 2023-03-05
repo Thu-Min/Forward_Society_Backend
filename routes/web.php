@@ -31,7 +31,6 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->group(function ()
     Route::get('/timeline/list',[TimelineController::class,'timelineList'])->name('timeline.list');
     Route::get('/timeline/edit/{id}',[TimelineController::class,'timelineEdit'])->name('timeline.edit');
     Route::post('/timeline/update/{id}',[TimelineController::class,'timelineUpdate'])->name('timeline.update');
-
     Route::get('/timeline/delete/{id}',[TimelineController::class,'timelineDelete'])->name('timeline.delete');
 
 });

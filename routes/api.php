@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\TimelineApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+//Api Resource for Timelines
+    Route::get('/timelines',[TimelineApiController::class,'timelines']);
+//Api Resource for single Timeline
+    Route::get('/timelines/{id}',[TimelineApiController::class,'timeline']);
+
