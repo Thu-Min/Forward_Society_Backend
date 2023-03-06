@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+////Api Resource to create Message
+    Route::post('/message/send',[MessageApiController::class,'messageSend']);
+
+//Api Resource for Messages
+    Route::get('/messages',[MessageApiController::class,'messages']);
+//Api Resource for single Message
+    Route::get('/messages/{id}',[MessageApiController::class,'message']);
