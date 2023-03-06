@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Event;
+use App\Models\EventCategory;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -26,5 +29,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
         ]);
+
+        Event::factory(5)
+            ->count(5)
+            ->hasEventCategory(3)
+            ->create();
+        
     }
 }
