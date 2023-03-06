@@ -6,6 +6,8 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\blog;
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,5 +28,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
         ]);
+
+        Blog::factory()->count(20)->create();
+
+        Category::factory()->count(5)->create();
     }
 }

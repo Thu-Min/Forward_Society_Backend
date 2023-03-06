@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
+use App\Models\blog;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,9 +22,19 @@ Route::middleware(['auth', 'verified'])->prefix('/dashboard')->group(function ()
         return view('components/dashboard/user');
     })->name('user');
 
-    Route::get('/blog', function() {
-        return view('components/dashboard/blog');
-    })->name('blog');
+    Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+
+    Route::get('/blog/detail/{id}', [BlogController::class, 'show'])->name('blog.show');
+    
+    Route::get('/blog/add', [BlogController::class, 'create'])->name('blog.create');
+
+    Route::post('/blog/add', [BlogController::class, 'store'])->name('blog.store');
+    
+    Route::get('/blog/delete/{id}', [BlogController::class, 'destroy']);
+
+    Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+
+    Route::post('/blog/edit/{id}', [BlogController::class, 'update'])->name('blog.update');    
 });
 
 Route::middleware('auth')->group(function () {
