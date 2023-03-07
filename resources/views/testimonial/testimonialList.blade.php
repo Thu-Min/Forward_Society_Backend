@@ -105,6 +105,10 @@
 
             </tbody>
         </table>
+        <div class="mt-6">
+             {{$testimonialData->links()}}
+        </div>
+
         @else
            <h3 class="mx-auto mt-10 text-2xl font-semibold text-center text-blue-600"> There is no Testimonial Data.Add some new....</h3>
         @endif

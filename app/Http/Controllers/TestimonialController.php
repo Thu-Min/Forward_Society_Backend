@@ -11,7 +11,8 @@ class TestimonialController extends Controller
 {
     //Testimonial List Page
     public function testimonialList(){
-        $testimonialData=Testimonial::orderBy('id','DESC')->get();
+        $testimonialData=Testimonial::orderBy('id','DESC')->paginate(8);
+
         return view('testimonial.testimonialList',compact('testimonialData'));
     }
     //Testimonial Create Page
