@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\EventCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class EventController extends Controller
 {
@@ -16,7 +17,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('components/dashboard/events',[
+        return view('dashboard/events/index',[
             'events' => Event::latest()
                     ->paginate(10)
         ]);
@@ -27,7 +28,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('components/dashboard/eventCreate',[
+        return view('dashboard/events/create',[
             'categories' => EventCategory::latest()->get()
         ]);
     }
@@ -39,17 +40,7 @@ class EventController extends Controller
     {
 
         $formData = $request->validate([
-            'name' => ['required','max:255'],
-            'slug' => [
-                'required',
-                'max:255', 
-                Rule::unique('events'),
-                function($attribute, $value, $fail) {
-                    if(str_contains($value,' ')) {
-                        $fail('The '.$attribute.' must not contain Space.');
-                    }
-                }
-            ],
+            'name' => ['required','max:255', Rule::unique('events')],
             'description' => ['required'],
             'description_detail' => ['required'],
             'instructor' => ['required', 'string'],
@@ -67,6 +58,7 @@ class EventController extends Controller
             'categories.array' => 'You can only add 3 categories most!',
         ]);
 
+        $formData['slug'] = Str::slug($formData['name'], '-');
         $formData['thumbnail'] = $request->file('thumbnail')->store('thumbnails');
         $event = Event::create($formData);
         $event->addEventCategories($request->categories);
@@ -79,7 +71,9 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        return view('dashboard/events/show',[
+            'event' => $event->load('eventCategory')
+        ]);
     }
 
     /**
@@ -87,7 +81,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        return view('components/dashboard/eventEdit',[
+        return view('dashboard/events/edit',[
             'event' => $event,
             'eventCategories' => $event->eventCategory,
             'categories' => EventCategory::latest()->get()
@@ -100,17 +94,7 @@ class EventController extends Controller
     public function update(Request $request, Event $event)
     {
         $formData = $request->validate([
-            'name' => ['required','max:255'],
-            'slug' => [
-                'required',
-                'max:255', 
-                Rule::unique('events')->ignore($event->id),
-                function($attribute, $value, $fail) {
-                    if(str_contains($value,' ')) {
-                        $fail('The '.$attribute.' must not contain Space.');
-                    }
-                }
-            ],
+            'name' => ['required','max:255', Rule::unique('events')->ignore($event->id)],
             'description' => ['required'],
             'description_detail' => ['required'],
             'instructor' => ['required', 'string'],
@@ -127,6 +111,8 @@ class EventController extends Controller
         ],[
             'categories.array' => 'You can only add 3 categories most!',
         ]);
+
+        $formData['slug'] = Str::slug($formData['name'], '-');
 
         if($request->hasFile('thumbnail')) {
             $formData['thumbnail'] = $request->thumbnail->store('thumbnails');
