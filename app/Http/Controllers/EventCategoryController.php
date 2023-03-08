@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateEventCategoryRequest;
 use App\Models\EventCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
+
 
 class EventCategoryController extends Controller
 {
@@ -15,7 +17,7 @@ class EventCategoryController extends Controller
      */
     public function index()
     {
-        return view('components/dashboard/eventCategories',[
+        return view('dashboard/event_categories/index',[
             'eventCategories' => EventCategory::latest()
                     ->paginate(8)
         ]);
@@ -26,7 +28,7 @@ class EventCategoryController extends Controller
      */
     public function create()
     {
-        return view('components/dashboard/eventCategoryCreate');
+        return view('dashboard/event_categories/create');
     }
 
     /**
@@ -34,23 +36,17 @@ class EventCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $formDate = $request->validate([
-            'name' => ['required', 'max:255', 'string'],
-            'slug' => [
-                'required',
-                'max:255', 
-                'string', 
-                Rule::unique('event_categories'),
-                function($attribute, $value, $fail) {
-                    if(str_contains($value, ' ')) {
-                        $fail('The '.$attribute.' must not contain Space!');
-                    }
-                }
+        $formData = $request->validate([
+            'name' => ['required',
+                    'max:255', 
+                    'string', 
+                    Rule::unique('event_categories')
                 ],
         ]);
-
-        EventCategory::create($formDate);
+        $formData['slug'] = Str::slug($formData['name'], '-');
+        EventCategory::create($formData);
         return redirect(route('eventCategories'));
+
         }
 
     /**
@@ -66,7 +62,7 @@ class EventCategoryController extends Controller
      */
     public function edit(EventCategory $eventCategory)
     {
-        return view('components/dashboard/eventCategoryEdit',[
+        return view('dashboard/event_categories/edit',[
             'eventCategory' => $eventCategory
         ]);
     }
@@ -76,21 +72,12 @@ class EventCategoryController extends Controller
      */
     public function update(Request $request, EventCategory $eventCategory)
     {
-        $formDate = $request->validate([
-            'name' => ['required', 'max:255', 'string'],
-            'slug' => [
-                'required', 
-                'max:255', 'string', 
-                Rule::unique('event_categories')->ignore($eventCategory->id),
-                function($attribute, $value, $fail) {
-                    if(str_contains($value, ' ')) {
-                        $fail('The '.$attribute.' must not contain Space!');
-                    }
-                }
-            ],
+        $formData = $request->validate([
+            'name' => ['required', 'max:255', 'string', Rule::unique('event_categories')->ignore($eventCategory->id)],
         ]);
-
-        $eventCategory->update($formDate);
+        
+        $formData['slug'] = Str::slug($formData['name'], '-');
+        $eventCategory->update($formData);
         return redirect(route('eventCategories'));
     }
 

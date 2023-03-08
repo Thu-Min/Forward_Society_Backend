@@ -15,21 +15,22 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->prefix('/dashboard')->group(function () {
     Route::get('/', function() {
-        return view('components/dashboard/dashboard');
+        return view('dashboard/dashboard');
     })->name('dashboard');
 
     Route::get('/user', function() {
-        return view('components/dashboard/user');
+        return view('dashboard/user');
     })->name('user');
 
     Route::get('/blog', function() {
-        return view('components/dashboard/blog');
+        return view('dashboard/blog');
     })->name('blog');
 
     Route::get('/events',[EventController::class,'index'])->name('events');
     Route::get('/events/create',[EventController::class,'create'])->name('events.create');
     Route::post('/events/store',[EventController::class,'store'])->name('events.store');
-    Route::get('/events/{event:slug}',[EventController::class,'edit'])->name('events.edit');
+    Route::get('/events/{event:slug}',[EventController::class,'show'])->name('events.show');
+    Route::get('/events/{event:slug}/edit',[EventController::class,'edit'])->name('events.edit');
     Route::patch('/events/{event:slug}',[EventController::class,'update'])->name('events.update');
     Route::delete('/events/{event:slug}',[EventController::class,'destroy'])->name('events.delete');
 
